@@ -14,16 +14,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var withGlobals = function withGlobals(StoryFn, context) {
   var _useGlobals = (0, _addons.useGlobals)(),
     _useGlobals2 = _slicedToArray(_useGlobals, 1),
-    _useGlobals2$ = _useGlobals2[0],
-    darkMode = _useGlobals2$.darkMode,
-    prefix = _useGlobals2$.prefix;
+    darkMode = _useGlobals2[0].darkMode;
   var isInDocs = context.viewMode === "docs";
   (0, _addons.useEffect)(function () {
     var selector = isInDocs ? '#docs-root' : 'html';
     changeBackgroundMode(selector, {
       darkMode: darkMode,
-      isInDocs: isInDocs,
-      prefix: prefix
+      isInDocs: isInDocs
     });
   }, [darkMode]);
   return StoryFn();
@@ -31,10 +28,9 @@ var withGlobals = function withGlobals(StoryFn, context) {
 exports.withGlobals = withGlobals;
 var changeBackgroundMode = function changeBackgroundMode(selector, state) {
   var rootElement = document.querySelector(selector);
-  var darkModeClass = state.prefix ? "".concat(state.prefix, "dark") : "dark";
   if (state.darkMode) {
-    rootElement.classList.add(darkModeClass);
+    rootElement.dataset.mode = "surfe-dark";
   } else {
-    rootElement.classList.remove(darkModeClass);
+    rootElement.dataset.mode = "";
   }
 };
