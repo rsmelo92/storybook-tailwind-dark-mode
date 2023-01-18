@@ -14,27 +14,27 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var withGlobals = function withGlobals(StoryFn, context) {
   var _useGlobals = (0, _addons.useGlobals)(),
     _useGlobals2 = _slicedToArray(_useGlobals, 1),
-    darkMode = _useGlobals2[0].darkMode;
+    _useGlobals2$ = _useGlobals2[0],
+    darkMode = _useGlobals2$.darkMode,
+    prefix = _useGlobals2$.prefix;
   var isInDocs = context.viewMode === "docs";
   (0, _addons.useEffect)(function () {
     var selector = isInDocs ? '#docs-root' : 'html';
     changeBackgroundMode(selector, {
       darkMode: darkMode,
-      isInDocs: isInDocs
+      isInDocs: isInDocs,
+      prefix: prefix
     });
   }, [darkMode]);
   return StoryFn();
 };
 exports.withGlobals = withGlobals;
 var changeBackgroundMode = function changeBackgroundMode(selector, state) {
-  var _useGlobals3 = (0, _addons.useGlobals)(),
-    _useGlobals4 = _slicedToArray(_useGlobals3, 1),
-    prefix = _useGlobals4[0].prefix;
   var rootElement = document.querySelector(selector);
-  var className = prefix ? "".concat(prefix, "dark") : "dark";
+  var darkModeClass = state.prefix ? "".concat(prefix, "dark") : "dark";
   if (state.darkMode) {
-    rootElement.classList.add(className);
+    rootElement.classList.add(darkModeClass);
   } else {
-    rootElement.classList.remove(className);
+    rootElement.classList.remove(darkModeClass);
   }
 };

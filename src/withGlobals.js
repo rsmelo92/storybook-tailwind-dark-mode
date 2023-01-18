@@ -2,25 +2,24 @@
 import { useEffect, useGlobals } from "@storybook/addons";
 
 export const withGlobals = (StoryFn, context) => {
-  const [{ darkMode }] = useGlobals();
+  const [{ darkMode, prefix }] = useGlobals();
   const isInDocs = context.viewMode === "docs";
 
   useEffect(() => {
     const selector = isInDocs ? '#docs-root' : 'html';
 
-    changeBackgroundMode(selector, { darkMode, isInDocs });
+    changeBackgroundMode(selector, { darkMode, isInDocs, prefix });
   }, [darkMode]);
 
   return StoryFn();
 };
 
 const changeBackgroundMode = (selector, state) => {
-  const [{ prefix }] = useGlobals();
   const rootElement = document.querySelector(selector);
-  const className = prefix ? `${prefix}dark`: "dark" 
+  const darkModeClass = state.prefix ? `${prefix}dark` : "dark"
   if (state.darkMode) {
-    rootElement.classList.add(className);
+    rootElement.classList.add(darkModeClass);
   } else {
-    rootElement.classList.remove(className)
+    rootElement.classList.remove(darkModeClass)
   }
 }
