@@ -31,7 +31,7 @@ var withGlobals = function withGlobals(StoryFn, context) {
 exports.withGlobals = withGlobals;
 var changeBackgroundMode = function changeBackgroundMode(selector, state) {
   var rootElement = document.querySelector(selector);
-  var darkModeClass = state.prefix ? "".concat(prefix, "dark") : "dark";
+  var darkModeClass = state.prefix ? "".concat(state.prefix, "dark") : "dark";
   if (state.darkMode) {
     rootElement.classList.add(darkModeClass);
   } else {

@@ -16,7 +16,7 @@ export const withGlobals = (StoryFn, context) => {
 
 const changeBackgroundMode = (selector, state) => {
   const rootElement = document.querySelector(selector);
-  const darkModeClass = state.prefix ? `${prefix}dark` : "dark"
+  const darkModeClass = state.prefix ? `${state.prefix}dark` : "dark"
   if (state.darkMode) {
     rootElement.classList.add(darkModeClass);
   } else {
